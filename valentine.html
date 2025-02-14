@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Gift</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(45deg, #ffccdc, #ff99bb, #ff66aa, #ff3388);
+            background-size: 400% 400%;
+            animation: gradientBG 8s ease infinite;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            position: relative;
+            flex-direction: column;
+            padding-top: 80px;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .hint-text {
+            font-size: 22px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+            animation: fadeInOut 2s infinite alternate;
+            transition: opacity 0.5s ease;
+        }
+        @keyframes fadeInOut {
+            0% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+        .container.open ~ .hint-text {
+            opacity: 0;
+        }
+        .container {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+            animation: pulse 2s infinite alternate;
+            margin-top: 160px;
+        }
+        .container:hover {
+            transform: scale(1.05);
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.08); }
+        }
+        .envelope {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #ff5a79, #ff2e5a);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), inset 0 -3px 5px rgba(255, 255, 255, 0.2);
+            border: 2px solid #ff3f6d;
+            animation: glow 1.5s infinite alternate;
+        }
+        @keyframes glow {
+            0% { box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 61, 99, 0.5); }
+            100% { box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 61, 99, 1); }
+        }
+        .flap {
+            position: absolute;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(145deg, #ff2e5a, #ff1a47);
+            border-radius: 10px 10px 0 0;
+            transform-origin: top;
+            transition: transform 0.5s;
+            box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.3);
+        }
+        .message {
+            position: absolute;
+            bottom: -100px;
+            left: 50%;
+            transform: translate(-50%, 0);
+            width: 80%;
+            background: white;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transition: transform 0.8s ease-out, opacity 0.5s;
+        }
+        .message img {
+            width: 100%;
+            border-radius: 5px;
+        }
+        .container.open .flap {
+            transform: rotateX(180deg);
+        }
+        .container.open .message {
+            transform: translate(-50%, -30px);
+            opacity: 1;
+        }
+        .call-button {
+            display: none;
+            margin-top: 80px;
+            background: linear-gradient(145deg, #ff5a79, #ff2e5a);
+            color: white;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(255, 61, 99, 0.4);
+            position: relative;
+            top: 40px;
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        .call-button:hover {
+            background: linear-gradient(145deg, #ff2e5a, #ff1a47);
+            box-shadow: 0 6px 12px rgba(255, 61, 99, 0.5);
+        }
+        .container.open ~ .call-button {
+            display: inline-block;
+            animation: fadeInScale 0.5s forwards;
+        }
+        @keyframes fadeInScale {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="hint-text">💌 Tap to reveal 💌</div>
+    <audio id="openSound" src="https://www.myinstants.com/media/sounds/romantic-kiss.mp3"></audio>
+    <div class="container" onclick="openEnvelope()">
+        <div class="envelope">
+            <div class="flap"></div>
+        </div>
+        <div class="message">
+            <img src="image.jpg" alt="Happy Valentine's Day">
+            <h2>Happy Valentine's Day! ❤️</h2>
+            <p>Many fights, but we’re unstoppable!</p>
+            <p>You are fire, and I’m gasoline.</p>
+            <p>Together, we burn like no other. See you in 2 weeks, hot stuff!</p>
+        </div>
+    </div>
+    <a href="facetime:+66655153400" class="call-button">Call to fight 📞</a>
+    <script>
+        function openEnvelope() {
+            document.querySelector('.container').classList.toggle('open');
+            document.getElementById('openSound').play();
+        }
+    </script>
+</body>
+</html>
